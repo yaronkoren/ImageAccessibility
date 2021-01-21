@@ -1,0 +1,53 @@
+Image Accessibility extension
+
+        Version 0.1
+        Yaron Koren
+
+This is free software licensed under the GNU General Public License. Please
+see http://www.gnu.org/copyleft/gpl.html for further details, including the
+full text and terms of the license.
+
+== Overview ==
+
+Image Accessibility is an extension to MediaWiki that allows for defining
+long descriptions of images on the wiki (especially complex images such as
+diagrams), so that such images can be understood by visually impaired people,
+presumably using screen reader software.
+
+The "alt" attribute for images is not a suitable location for such
+descriptions, since it is intended only for short summaries. Ironically,
+neither is the "longdesc" attribute, which was intended for this purpose; it
+was never well supported by browsers, and was deprecated in 2014.
+
+Instead, this extension lets you place the description at a subpage (by
+default, "/LongDescription") of the image's wiki page; and image that has
+such a subpage defined for it will get a "View description of this image"
+link placed below it, on whatever page(s) it is displayed on.
+
+For more information, see the extension homepage at:
+https://www.mediawiki.org/wiki/Extension:Image_Accessibility
+
+== Requirements ==
+
+This version of the Image Accessibility extension requires MediaWiki 1.31 or
+higher.
+
+== Installation ==
+
+To install the extension, place the entire 'ImageAccessibility' directory
+within your MediaWiki 'extensions' directory, then add the following line to
+your 'LocalSettings.php' file:
+
+     wfLoadExtension( 'ImageAccessibility' );
+
+== Credits ==
+
+Image Accessibility was created by Yaron Koren.
+
+== Contact ==
+
+Comments, questions, suggestions and bug reports can be sent to the
+MediaWiki mailing list:
+
+ https://lists.wikimedia.org/mailman/listinfo/mediawiki-l
+ 

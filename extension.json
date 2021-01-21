@@ -1,0 +1,41 @@
+{
+	"name": "Image Accessibility",
+	"version": "0.1",
+	"author": [
+		"Yaron Koren"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:Image_Accessibility",
+	"descriptionmsg": "imageaccessibility-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.31.0"
+	},
+	"MessagesDirs": {
+		"ImageAccessibility": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"ImageAccessibility": "ImageAccessibility.php"
+	},
+        "ResourceModules": {
+                "ext.imageaccessibility": {
+                        "scripts": [
+                                "ImageAccessibility.js"
+                        ]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "ImageAccessibility"
+	},
+	"Hooks": {
+		"BeforePageDisplay": "ImageAccessibility::addRLModules",
+		"ThumbnailBeforeProduceHTML": "ImageAccessibility::addLongDescURL"
+	},
+	"config": {
+		"ImageAccessibilitySuffix": "/LongDescription"
+	},
+	"manifest_version": 1
+}

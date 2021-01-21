@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yaron Koren"
+		]
+	},
+	"imageaccessibility-desc": "Allows for creating long descriptions of images, for use by screen reader software"
+}
