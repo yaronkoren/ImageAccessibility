@@ -2,7 +2,7 @@
 
 	$('img[data-long-desc-url]').each( function() {
 		var longDescURL = $(this).attr('data-long-desc-url');
-		var longDescLink = '<p><a href="' + longDescURL + '">' +
+		var longDescLink = '<p class="imageLongDescription"><a href="' + longDescURL + '">' +
 			'View description of this image' + '</a></p>';
 		$(longDescLink).insertAfter($(this).parent());
 	});
