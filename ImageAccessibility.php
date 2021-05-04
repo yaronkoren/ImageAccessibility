@@ -7,7 +7,7 @@ class ImageAccessibility {
                 return true;
         }
 
-	public static function addLongDescURL( ThumbnailImage $thumbnail, array &$attribs, array &$linkAttribs ) {
+	public static function addLongDescURL( ThumbnailImage $thumbnail, array &$attribs, &$linkAttribs ) {
 		global $wgTitle, $wgImageAccessibilitySuffix;
 
 		$imageName = $thumbnail->getFile()->getTitle()->getFullText();
