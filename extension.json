@@ -19,11 +19,11 @@
 	"AutoloadClasses": {
 		"ImageAccessibility": "ImageAccessibility.php"
 	},
-        "ResourceModules": {
-                "ext.imageaccessibility": {
-                        "scripts": [
-                                "ImageAccessibility.js"
-                        ]
+	"ResourceModules": {
+		"ext.imageaccessibility": {
+			"scripts": [
+				"ImageAccessibility.js"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
