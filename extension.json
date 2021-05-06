@@ -23,6 +23,11 @@
 		"ext.imageaccessibility": {
 			"scripts": [
 				"ImageAccessibility.js"
+			],
+			"messages": [
+				"imageaccessibility-viewdesc",
+				"imageaccessibility-createdesc",
+				"imageaccessibility-viewdescinternal"
 			]
 		}
 	},

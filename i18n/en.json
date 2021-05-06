@@ -4,5 +4,8 @@
 			"Yaron Koren"
 		]
 	},
-	"imageaccessibility-desc": "Allows for creating long descriptions of images, for use by screen reader software"
+	"imageaccessibility-desc": "Allows for creating long descriptions of images, for use by screen reader software",
+	"imageaccessibility-viewdesc": "View accessible description of this image",
+	"imageaccessibility-createdesc": "Create long description of this image",
+	"imageaccessibility-viewdescinternal": "View long description of this image"
 }
