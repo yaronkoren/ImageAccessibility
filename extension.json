@@ -8,16 +8,37 @@
 	"descriptionmsg": "imageaccessibility-desc",
 	"license-name": "GPL-2.0-or-later",
 	"type": "specialpage",
+	"namespaces": [
+		{
+			"id": 630,
+			"constant": "NS_FILE_DESCRIPTION",
+			"name": "File_description",
+			"conditional": true
+		},
+		{
+			"id": 631,
+			"constant": "NS_FILE_DESCRIPTION_TALK",
+			"name": "File_description_talk",
+			"conditional": true
+		}
+	],
 	"requires": {
-		"MediaWiki": ">= 1.31.0"
+		"MediaWiki": ">= 1.33.0"
+	},
+	"SpecialPages": {
+		"ShowFileDescription": "IAShowFileDescription"
 	},
 	"MessagesDirs": {
 		"ImageAccessibility": [
 			"i18n"
 		]
 	},
+	"ExtensionMessagesFiles": {
+		"ImageAccessbilityNS": "IANamespaces.php"
+	},
 	"AutoloadClasses": {
-		"ImageAccessibility": "ImageAccessibility.php"
+		"ImageAccessibility": "ImageAccessibility.php",
+		"IAShowFileDescription": "IAShowFileDescription.php"
 	},
 	"ResourceModules": {
 		"ext.imageaccessibility": {
@@ -36,11 +57,9 @@
 		"remoteExtPath": "ImageAccessibility"
 	},
 	"Hooks": {
+		"CanonicalNamespaces": "ImageAccessibility::registerNamespaces",
 		"BeforePageDisplay": "ImageAccessibility::addRLModules",
 		"ThumbnailBeforeProduceHTML": "ImageAccessibility::addLongDescURL"
-	},
-	"config": {
-		"ImageAccessibilitySuffix": "/LongDescription"
 	},
 	"manifest_version": 1
 }

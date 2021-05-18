@@ -1,34 +1,51 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class ImageAccessibility {
 
-        public static function addRLModules( OutputPage $out, Skin $skin ) {
-                $out->addModules( 'ext.imageaccessibility' );
+        public static function registerNamespaces( array &$list ) {
+                if ( !defined( 'NS_FILE_DESCRIPTION' ) ) {
+                        define( 'NS_FILE_DESCRIPTION', 631 );
+                        define( 'NS_FILE_DESCRIPTION_TALK', 631 );
+                }
+
+                $list[NS_FILE_DESCRIPTION] = 'File_description';
+                $list[NS_FILE_DESCRIPTION_TALK] = 'File_description_talk';
+
                 return true;
         }
 
-	public static function addLongDescURL( ThumbnailImage $thumbnail, array &$attribs, &$linkAttribs ) {
-		global $wgTitle, $wgImageAccessibilitySuffix;
+	public static function addRLModules( OutputPage $out, Skin $skin ) {
+		$out->addModules( 'ext.imageaccessibility' );
+		return true;
+	}
 
-		$imageName = $thumbnail->getFile()->getTitle()->getFullText();
-		$longDescPageName = $imageName . $wgImageAccessibilitySuffix;
-		$longDescPage = Title::newFromText( $longDescPageName );
+	public static function addLongDescURL( ThumbnailImage $thumbnail, array &$attribs, &$linkAttribs ) {
+		global $wgTitle;
+
+		$imageName = $thumbnail->getFile()->getName();
+		$fileDescPage = Title::makeTitleSafe( NS_FILE_DESCRIPTION, $imageName );
 
 		if ( $wgTitle->getNamespace() == NS_FILE ) {
-			if ( !$longDescPage->exists() ) {
-				$longDescURL = $longDescPage->getInternalURL( [ 'action' => 'edit', 'redlink' => '1' ]);
-				$attribs['data-create-long-desc-url'] = $longDescURL;
+			if ( !$fileDescPage->exists() ) {
+				$fileDescURL = $fileDescPage->getInternalURL( [ 'action' => 'edit', 'redlink' => '1' ]);
+				$attribs['data-create-long-desc-url'] = $fileDescURL;
 			} else {
-				$longDescURL = $longDescPage->getInternalURL();
-				$attribs['data-view-long-desc-url'] = $longDescURL;
+				$fileDescURL = $fileDescPage->getInternalURL();
+				$attribs['data-view-long-desc-url'] = $fileDescURL;
 			}
 			return true;
 		}
 
-		if ( !$longDescPage->exists() ) {
+		if ( !$fileDescPage->exists() ) {
 			return true;
 		}
-		$longDescURL = $longDescPage->getInternalURL( [ 'action' => 'render' ]);
+		$showFileDescTitle = MediaWikiServices::getInstance()
+                        ->getSpecialPageFactory()
+                        ->getPage( 'ShowFileDescription' )
+			->getPageTitle();
+		$longDescURL = $showFileDescTitle->getInternalURL() . '/' . $imageName;
 		$attribs['data-long-desc-url'] = $longDescURL;
 
 		return true;
