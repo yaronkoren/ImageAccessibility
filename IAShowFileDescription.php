@@ -28,9 +28,16 @@ class IAShowFileDescription extends SpecialPage {
 		}
 
 		$user = $this->getUser();
-		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-		if ( !$permissionManager->userCan( 'read', $user, $title ) ) {
-			return true;
+		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userCan' ) ) {
+			// MW 1.33+
+			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+			if ( !$permissionManager->userCan( 'read', $user, $title ) ) {
+				return true;
+			}
+		} else {
+			if ( !$title->userCan( 'read ' ) ) {
+				return true;
+			}
 		}
 
 		$wikiPage = WikiPage::factory( $title );

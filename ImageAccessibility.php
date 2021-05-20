@@ -4,17 +4,17 @@ use MediaWiki\MediaWikiServices;
 
 class ImageAccessibility {
 
-        public static function registerNamespaces( array &$list ) {
-                if ( !defined( 'NS_FILE_DESCRIPTION' ) ) {
-                        define( 'NS_FILE_DESCRIPTION', 631 );
-                        define( 'NS_FILE_DESCRIPTION_TALK', 631 );
-                }
+	public static function registerNamespaces( array &$list ) {
+		if ( !defined( 'NS_FILE_DESCRIPTION' ) ) {
+			define( 'NS_FILE_DESCRIPTION', 631 );
+			define( 'NS_FILE_DESCRIPTION_TALK', 631 );
+		}
 
-                $list[NS_FILE_DESCRIPTION] = 'File_description';
-                $list[NS_FILE_DESCRIPTION_TALK] = 'File_description_talk';
+		$list[NS_FILE_DESCRIPTION] = 'File_description';
+		$list[NS_FILE_DESCRIPTION_TALK] = 'File_description_talk';
 
-                return true;
-        }
+		return true;
+	}
 
 	public static function addRLModules( OutputPage $out, Skin $skin ) {
 		$out->addModules( 'ext.imageaccessibility' );
@@ -41,11 +41,16 @@ class ImageAccessibility {
 		if ( !$fileDescPage->exists() ) {
 			return true;
 		}
-		$showFileDescTitle = MediaWikiServices::getInstance()
-                        ->getSpecialPageFactory()
-                        ->getPage( 'ShowFileDescription' )
-			->getPageTitle();
-		$longDescURL = $showFileDescTitle->getInternalURL() . '/' . $imageName;
+		if ( method_exists( 'MediaWiki\MediaWikiServices', 'getSpecialPageFactory' ) ) {
+			// MW 1.32+
+			$showFileDescPage = MediaWikiServices::getInstance()
+				->getSpecialPageFactory()
+				->getPage( 'ShowFileDescription' );
+		} else {
+			/** @phan-suppress-next-line PhanUndeclaredClassMethod */
+			$showFileDescPage = SpecialPageFactory::getPage( 'ShowFileDescription' );
+		}
+		$longDescURL = $showFileDescPage->getPageTitle()->getInternalURL() . '/' . $imageName;
 		$attribs['data-long-desc-url'] = $longDescURL;
 
 		return true;
