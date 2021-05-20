@@ -27,7 +27,7 @@ class ImageAccessibility {
 		$imageName = $thumbnail->getFile()->getName();
 		$fileDescPage = Title::makeTitleSafe( NS_FILE_DESCRIPTION, $imageName );
 
-		if ( $wgTitle->getNamespace() == NS_FILE ) {
+		if ( $wgTitle && $wgTitle->getNamespace() == NS_FILE ) {
 			if ( !$fileDescPage->exists() ) {
 				$fileDescURL = $fileDescPage->getInternalURL( [ 'action' => 'edit', 'redlink' => '1' ]);
 				$attribs['data-create-long-desc-url'] = $fileDescURL;
